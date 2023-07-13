@@ -4,6 +4,14 @@ const PORT = process.env.PORT || 3001;
 const userRoutes = require('./routes/user-routes');
 const imageRoutes = require('./routes/image-upload'); // add this file import to the top of the file
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://ec2-3-15-4-160.us-east-2.compute.amazonaws.com');
+  // Add other necessary headers if applicable
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 app.use('/api/', userRoutes);
 app.use('/api/', imageRoutes); // add this route for image upload
 
